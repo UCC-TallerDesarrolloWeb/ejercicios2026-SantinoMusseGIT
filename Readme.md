@@ -16,7 +16,7 @@
 
 ### HTML
 -  [x] Primer HTML
--  [ ] Secciones
+-  [x] Secciones
 -  [ ] Títulos
 -  [ ] Listas
 -  [ ] Link
