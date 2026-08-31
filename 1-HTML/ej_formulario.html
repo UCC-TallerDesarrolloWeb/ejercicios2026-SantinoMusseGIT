@@ -19,23 +19,33 @@
 
 <h3>Suscribase a Nuestro Portal de Noticias! Crear una cuenta es rápido!</h3>
 <form name="form-suscription">
+    <fieldset>
+        <legend>datos personales</legend>
     <p>
+        <label for="nombre">nombre</label>
         Nombre: <input type="text" name="Nombre" placeholder="Ingrese su nombre">
     </p>
     <p>
+        <label for="apellido">Apellido</label>
         Apellido: <input type="text" name="Apellido" placeholder="Ingrese su apellido">
     </p>
     <p>
         Sexo: 
+        <label for="masculino">masculino</label>
         Masculino <input type="radio" name="genero" value="masculino">
+        <label for="femenino">femenino</label>
         Femenino <input type="radio" name="genero" value="femenino">
     </p>
     <p>
+        <label for="Edad">edad</label>
         Edad: <input type="number" name="EDAD" placeholder="Ingrese su edad">
     </p>
     <p>
         Email: <input type="email" name="Email" placeholder="Ingrese su email">
     </p>
+    </fieldset>
+    <fieldset>
+        <legend> datos de cuenta</legend>
     <p>
         Usuario: <input type="text" name="User"placeholder="ingrese su usuario">
     </p>
@@ -45,6 +55,7 @@
     <p>
     Confirmar Password: <input type="password" name="contraseña" placeholder="Ingrese su contraseña">
     </p>
+    </fieldset>
 <p>
 Tipo de servicio:
 <select name="tipo de servicio">
