@@ -38,9 +38,9 @@
 -  [x] Backgrounds
 -  [ ] Position
 -  [x] 2 Columnas
--  [ ] Grid
--  [ ] grid-areas
--  [ ] Mejora
+-  [x] Grid
+-  [x] grid-areas
+-  [x] Mejora
 -  [ ] Transitions
 -  [ ] Viewport
 -  [ ] Responsive
