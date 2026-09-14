@@ -1,0 +1,22 @@
+
+        body{
+            text-align: center;
+            font-family: 'Saira', sans-serif;
+            background:linear-gradient(to right, rgb(118, 118, 217), rgba(161, 1, 1, 0.616)); 
+        }
+        h3{
+            font-family: 'Oswald', sans-serif;
+            text-shadow: 5px, 3px, rgb(242, 255, 0)
+        }
+        div{
+            border: 1px solid black;
+            margin: 15px;
+            padding: 10px;
+            background-color: rgb(118, 118, 83);
+            border-radius: 10px;
+            box-shadow: 5px 5px 5px black;
+        }
+        #user{
+            width: 5%;
+            float: left;
+        }
