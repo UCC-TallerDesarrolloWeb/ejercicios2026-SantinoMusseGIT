@@ -61,3 +61,61 @@ const productos = [
     imagen: "protectores-manos.webp",
   },
 ];
+
+let cargarProductos = () => {
+  let contenido = " ";
+
+  productos.forEach((elemento, id) => {
+    contenido += `<div>
+                <img src="${elemento.imagen}" alt="elemento.nombre">
+                <h3>${elemento.nombre}</h3>
+                <p>${elemento.precio}</p>
+                <button type="button" onclick="mostrarModal(${id})">Ver Detalles
+                </button>
+                <button type="button" onclick="agregarAlCarrito(${id})">Agregar al Carrito
+                </button>
+            </div>`;
+  });
+
+  };  
+
+  let agregarAlcarrito = (id) => {
+    let carritoList = localStorage.getItem("carrito");
+    console.log(carritoList);
+
+    if(carritoList == null){
+      carritoList = [];
+    }else{
+      carritoList = JSON.parse(carritoList);
+    }
+    carritoList.push(id);
+    localStorage.setItem("carrito", JSON.stringify(carritoList));
+  };
+
+  let mostrarModal = (id) => {
+    document.getElmenteById("titulo-producto").innerText = productos[id].nombre;
+    document.getElementById("descripcion-producto").innerText =
+      productos[id].description;
+    document.getElementById("precio-producto").innerText = productos[id].precio;
+    document.getElementById("imagen-producto").src = productos[id].imagen;
+    document.getElementById("enlace-producto").href = productos[id].web;
+  }
+
+let cargarCarrito = () => {
+  let carritoList = localStorage.getItem("carrito");
+  let contenido = " ";
+
+  if(carritoList == null){
+    contenido = "<p>El carrito está vacío</p>";
+  }else{
+    carritoList = JSON.parse(carritoList);
+    carritoList.forEach((num) => {
+      contenido += `<div>
+                <img src="${productos[num].imagen}" alt="productos[num].nombre">
+                <h3>${productos[num].nombre}</h3>
+                <p>${productos[num].precio}</p>
+            </div>`;
+    });
+  }
+  document.getElementById("contenido-carrito").innerHTML = contenido;
+}

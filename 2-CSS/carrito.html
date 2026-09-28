@@ -1,52 +1,18 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>catalogo de productos</title>
+        <title>carrito</title>
         <link rel="stylesheet" href="catalogo.css" type="text/css" rel="stylesheet"> 
         <script type="text/javascript" src="tienda.js"></script>
     </head>
-    <body class="grid-container" onload="CargarProductos()">
+    <body class="grid-container" onload="CargarCarrito()">
         <header class="item1">
-            <h1>catalogo de productos</h1>
+            <h1>carrito</h1>
         </header>
         <nav class="item2">
             <a href="productos.html">catalogo de productos</a>
-            <a href="">carrito de compras</a>
+            <a href="carrito.html">carrito de compras</a>
         </nav>
-        <aside class="item3">
-            <form>
-            <fieldset>
-                <legend>Buscador</legend>
-                <label for="buscador">Buscar</label>
-                <input type="text" name="buscador" id="buscador" placeholder="buscar producto">
-                
-            </fieldset>
-            <fieldset>
-                <legend>Precios</legend>
-                <p>
-                <label for="minimo">Minimo</label>
-                <input type="number" name="minimo" id="minimo" placeholder="minimo">
-                </p>
-                <p>
-                <label for="maximo">Maximo</label>
-                <input type="number" name="maximo" id="maximo" placeholder="maximo">
-                </p>
-            </fieldset>
-            <fieldset>
-                <legend>tipo de productos</legend>
-                <p>
-                    <input type="checkbox" name="tipo" id="tipo1">
-                    <label for="tipo1">Motor</label>
-                    <input type="checkbox" name="tipo" id="tipo2">
-                    <label for="tipo2">Suspension</label>
-                    <input type="checkbox" name="tipo" id="tipo3">
-                    <label for="tipo3">Interior</label>
-                    <input type="checkbox" name="tipo" id="tipo4">
-                    <label for="tipo4">Exterior</label>
-                </p>
-            </fieldset>
-            </form>
-        </aside>
         <main>
             <div>
                 <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR-t8IK8Wudx5_ggGVczEVCREF5QzsE08ZI1MhiJR7RAg&s=10/cabezal-cerrado.webp" alt="cabezal cerrado">
