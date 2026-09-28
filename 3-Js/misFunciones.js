@@ -6,6 +6,45 @@
  * @return {void}
  */
 
+function cambiarUnidades(id, valor) {
+    var metro, pulgada, pie, yarda;
+
+    if(valor.includes(",")) {
+        valor = valor.replace(",", ".");
+    }
+    if(isNaN(valor)) {
+        alert("Por favor ingrese un valor numérico." + id);
+        metro = "";
+        pulgada = "";
+        pie = "";
+        yarda = "";
+    }else if(id === 'metro') {
+        metro = valor;
+        pulgada = valor * 39.3701;
+        pie = valor * 3.28084;
+        yarda = valor * 1.09361;
+    }else if(id === 'pulgada') {
+        metro = valor * 0.0254;
+        pulgada = valor;
+        pie = valor * 0.0833333;
+        yarda = valor * 0.0277778;
+    }else if(id === 'pie') {
+        metro = valor * 0.3048;
+        pulgada = valor * 12;
+        pie = valor;
+        yarda = valor * 0.333333;
+    }else if(id === 'yarda') {
+        metro = valor * 0.9144;
+        pulgada = valor * 36;
+        pie = valor * 3;
+        yarda = valor;
+    }
+
+    document.lasUnidades.unid_metro.value = math.round (metro*100)/100;
+    document.lasUnidades.unid_pulgada.value = math.round (pulgada*100)/100;
+    document.lasUnidades.unid_pie.value = math.round (pie*100)/100;
+    document.lasUnidades.unid_yarda.value = math.round (yarda*100)/100;
+}
 
 function convertirUnidades(id, valor) {
     if(isNaN(valor)) {
