@@ -14,15 +14,19 @@
     <form>
         <p>
             <label for="metro"> Metro</label> = <input id="metro" type="text" name="unid_metro">
+            <input id="metro" type="text" name="unid_metro" onchange="convertirUnidades(this.value, 'metro')">
         </p>
         <p>
             <label for="pulgada"> Pulgada</label> = <input id="pulgada" type="text" name="unid_pulgada">
+            <input id="pulgada" type="text" name="unid_pulgada" onchange="convertirUnidades(this.value, 'pulgada')">
         </p>
         <p>
             <label for="pie"> Pie </label> = <input id="pie" type="text" name="unid_pie">
+            <input id="pie" type="text" name="unid_pie" onchange="convertirUnidades(this.value, 'pie')">
         </p>
         <p>
             <label for="yarda"> Yarda</label> = <input id="yarda" type="text" name="unid_yarda">
+            <input id="yarda" type="text" name="unid_yarda" onchange="convertirUnidades(this.value, 'yarda')">
         </p>
     </form>
 </div>
