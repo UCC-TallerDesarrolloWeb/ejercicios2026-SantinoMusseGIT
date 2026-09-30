@@ -14,11 +14,11 @@
     <form>
         <p>
             <label for="grados">Grados</label> = 
-            <input id="grados" type="text" name="unid_grados" onchange="convertirGradosRadianes()">
-            
+            <input id="grados" type="text" name="unid_grados" onchange="convertirGradosRadianes(this.id)">
         </p>
         <p>
-            <label for="radianes">Radianes</label> = <input id="radianes" type="text" name="unid_radianes" onchange="convertirGradosRadianes()">
+            <label for="radianes">Radianes</label> = 
+            <input id="radianes" type="text" name="unid_radianes" onchange="convertirGradosRadianes(this.id)">
         </p>
     </form>
 </div>
