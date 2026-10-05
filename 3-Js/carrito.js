@@ -1,42 +1,81 @@
 // Recuperamos el carrito guardado en localStorage.
 // Si no hay nada guardado, usamos un array vacío.
-const carrito = JSON.parse(localStorage.getItem("carrito")) || [];
+let carrito = JSON.parse(localStorage.getItem("carrito")) || [];
 
 
-// Buscamos el div donde vamos a mostrar los productos
+// Buscamos el div donde mostramos los productos
 const contenedorCarrito = document.getElementById("carrito");
 
 
-// Si el carrito está vacío
-if (carrito.length === 0) {
+// Función para mostrar los productos del carrito
+function mostrarCarrito() {
 
-    contenedorCarrito.innerHTML = "<p>El carrito está vacío.</p>";
+    // Limpiamos el contenido antes de volver a mostrarlo
+    contenedorCarrito.innerHTML = "";
 
-} else {
+    // Si está vacío
+    if (carrito.length === 0) {
 
-    // Recorremos todos los productos guardados
-    carrito.forEach((producto) => {
+        contenedorCarrito.innerHTML =
+            "<p>El carrito está vacío.</p>";
 
-        // Creamos una tarjeta
-        const tarjeta = document.createElement("div");
+    } else {
 
-        tarjeta.classList.add("tarjeta-producto");
+        // Recorremos todos los productos
+        carrito.forEach((producto, indice) => {
 
-        // Agregamos el contenido
-        tarjeta.innerHTML = `
-            <img src="images/${producto.imagen}" alt="${producto.nombre}">
+            const tarjeta = document.createElement("div");
 
-            <h3>${producto.nombre}</h3>
+            tarjeta.classList.add("tarjeta-producto");
 
-            <p>${producto.description}</p>
+            tarjeta.innerHTML = `
+                <img src="images/${producto.imagen}" alt="${producto.nombre}">
 
-            <p>Marca: ${producto.marca}</p>
+                <h3>${producto.nombre}</h3>
 
-            <p>Precio: $${producto.precio}</p>
-        `;
+                <p>${producto.description}</p>
 
-        // Agregamos la tarjeta al HTML
-        contenedorCarrito.appendChild(tarjeta);
-    });
+                <p>Marca: ${producto.marca}</p>
 
+                <p>Precio: $${producto.precio}</p>
+
+                <button onclick="eliminarProducto(${indice})">
+                    Eliminar producto
+                </button>
+            `;
+
+            contenedorCarrito.appendChild(tarjeta);
+
+        });
+
+    }
 }
+
+
+// Función para eliminar un producto
+function eliminarProducto(indice) {
+
+    carrito.splice(indice, 1);
+
+    localStorage.setItem(
+        "carrito",
+        JSON.stringify(carrito)
+    );
+
+    mostrarCarrito();
+}
+
+
+// Función para vaciar todo el carrito
+function vaciarCarrito() {
+
+    localStorage.removeItem("carrito");
+
+    carrito = [];
+
+    mostrarCarrito();
+}
+
+
+// Mostramos el carrito cuando carga la página
+mostrarCarrito();
