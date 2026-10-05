@@ -13,11 +13,13 @@
 <body>
 
     <header>
+
         <h1>Tienda</h1>
 
         <a href="carrito.html">
             Ver carrito (<span id="contadorCarrito">0</span>)
         </a>
+
     </header>
 
     <main>
@@ -26,7 +28,9 @@
 
         <div class="filtros">
 
-            <label for="busqueda">Buscar:</label>
+            <label for="busqueda">
+                Buscar:
+            </label>
 
             <input
                 type="text"
@@ -36,7 +40,9 @@
 
             <br><br>
 
-            <label for="precioMin">Precio mínimo:</label>
+            <label for="precioMin">
+                Precio mínimo:
+            </label>
 
             <input
                 type="number"
@@ -44,7 +50,9 @@
                 placeholder="Precio mínimo"
             >
 
-            <label for="precioMax">Precio máximo:</label>
+            <label for="precioMax">
+                Precio máximo:
+            </label>
 
             <input
                 type="number"
@@ -54,7 +62,9 @@
 
             <br><br>
 
-            <label for="marca">Marca:</label>
+            <label for="marca">
+                Marca:
+            </label>
 
             <select id="marca">
 
@@ -112,13 +122,45 @@
 
             </label>
 
+            <br><br>
+
+            <label for="orden">
+                Ordenar por:
+            </label>
+
+            <select id="orden">
+
+                <option value="">
+                    Sin ordenar
+                </option>
+
+                <option value="precioAsc">
+                    Precio: menor a mayor
+                </option>
+
+                <option value="precioDesc">
+                    Precio: mayor a menor
+                </option>
+
+                <option value="nombreAsc">
+                    Nombre: A-Z
+                </option>
+
+                <option value="nombreDesc">
+                    Nombre: Z-A
+                </option>
+
+            </select>
+
         </div>
+
 
         <h2>Productos</h2>
 
         <div id="productos"></div>
 
     </main>
+
 
     <script src="tienda.js"></script>
 
