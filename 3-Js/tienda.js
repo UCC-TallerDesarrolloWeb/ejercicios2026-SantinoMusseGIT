@@ -64,7 +64,7 @@ const productos = [
 ];
 
 
-// Función para formatear el precio
+// Formatear precio
 function formatearPrecio(precio) {
 
     return new Intl.NumberFormat("es-AR", {
@@ -75,12 +75,12 @@ function formatearPrecio(precio) {
 }
 
 
-// Recuperamos el carrito guardado
+// Recuperar carrito
 let carrito =
     JSON.parse(localStorage.getItem("carrito")) || [];
 
 
-// Elementos del HTML
+// Elementos HTML
 const contenedorProductos =
     document.getElementById("productos");
 
@@ -103,16 +103,23 @@ const contadorCarrito =
     document.getElementById("contadorCarrito");
 
 
-// Función para actualizar el contador del carrito
+// Actualizar contador
 function actualizarContadorCarrito() {
 
+    const cantidadTotal = carrito.reduce(
+        (total, producto) => {
+            return total + (producto.cantidad || 1);
+        },
+        0
+    );
+
     contadorCarrito.textContent =
-        carrito.length;
+        cantidadTotal;
 
 }
 
 
-// Función para mostrar productos
+// Mostrar productos
 function mostrarProductos(listaProductos) {
 
     contenedorProductos.innerHTML = "";
@@ -124,6 +131,7 @@ function mostrarProductos(listaProductos) {
 
         return;
     }
+
 
     listaProductos.forEach((producto) => {
 
@@ -175,7 +183,7 @@ function mostrarProductos(listaProductos) {
 }
 
 
-// Función principal de filtros
+// Filtrar productos
 function filtrarProductos() {
 
     const texto =
@@ -191,7 +199,6 @@ function filtrarProductos() {
         selectMarca.value;
 
 
-    // Categorías seleccionadas
     const categoriasSeleccionadas = [];
 
     checkCategorias.forEach(
@@ -212,7 +219,6 @@ function filtrarProductos() {
     const productosFiltrados =
         productos.filter((producto) => {
 
-            // Filtro por palabra
             const coincideTexto =
                 producto.nombre
                     .toLowerCase()
@@ -225,14 +231,12 @@ function filtrarProductos() {
                     .includes(texto);
 
 
-            // Filtro por precio
             const coincidePrecio =
                 producto.precio >= precioMin
                 &&
                 producto.precio <= precioMax;
 
 
-            // Filtro por marca
             const coincideMarca =
                 marcaSeleccionada === ""
                 ||
@@ -240,7 +244,6 @@ function filtrarProductos() {
                     marcaSeleccionada;
 
 
-            // Filtro por categoría
             const coincideCategoria =
                 categoriasSeleccionadas.length === 0
                 ||
@@ -269,7 +272,7 @@ function filtrarProductos() {
 }
 
 
-// Eventos de los filtros
+// Eventos filtros
 inputBusqueda.addEventListener(
     "input",
     filtrarProductos
@@ -302,22 +305,46 @@ checkCategorias.forEach(
 );
 
 
-// Función para agregar producto al carrito
+// Agregar producto al carrito
 function agregarAlCarrito(indice) {
 
     const productoSeleccionado =
         productos[indice];
 
-    carrito.push(
-        productoSeleccionado
-    );
+
+    // Buscamos si el producto ya existe en el carrito
+    const productoExistente =
+        carrito.find(
+            (producto) =>
+                producto.nombre === productoSeleccionado.nombre
+        );
+
+
+    if (productoExistente) {
+
+        // Si ya existe aumentamos la cantidad
+        productoExistente.cantidad =
+            (productoExistente.cantidad || 1) + 1;
+
+    } else {
+
+        // Si no existe lo agregamos con cantidad 1
+        carrito.push({
+            ...productoSeleccionado,
+            cantidad: 1
+        });
+
+    }
+
 
     localStorage.setItem(
         "carrito",
         JSON.stringify(carrito)
     );
 
+
     actualizarContadorCarrito();
+
 
     alert(
         "Producto agregado al carrito"
@@ -326,9 +353,9 @@ function agregarAlCarrito(indice) {
 }
 
 
-// Mostrar productos al cargar
+// Mostrar productos
 mostrarProductos(productos);
 
 
-// Mostrar cantidad de productos del carrito
+// Actualizar contador inicial
 actualizarContadorCarrito();

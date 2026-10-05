@@ -15,7 +15,9 @@
     <header>
         <h1>Tienda</h1>
 
-        <a href="carrito.html">Ver carrito</a>
+        <a href="carrito.html">
+            Ver carrito (<span id="contadorCarrito">0</span>)
+        </a>
     </header>
 
     <main>
@@ -25,6 +27,7 @@
         <div class="filtros">
 
             <label for="busqueda">Buscar:</label>
+
             <input
                 type="text"
                 id="busqueda"
@@ -34,6 +37,7 @@
             <br><br>
 
             <label for="precioMin">Precio mínimo:</label>
+
             <input
                 type="number"
                 id="precioMin"
@@ -41,6 +45,7 @@
             >
 
             <label for="precioMax">Precio máximo:</label>
+
             <input
                 type="number"
                 id="precioMax"
@@ -52,9 +57,19 @@
             <label for="marca">Marca:</label>
 
             <select id="marca">
-                <option value="">Todas</option>
-                <option value="Gran Marc">Gran Marc</option>
-                <option value="Daedo">Daedo</option>
+
+                <option value="">
+                    Todas
+                </option>
+
+                <option value="Gran Marc">
+                    Gran Marc
+                </option>
+
+                <option value="Daedo">
+                    Daedo
+                </option>
+
             </select>
 
             <br><br>
@@ -62,30 +77,39 @@
             <p>Categorías:</p>
 
             <label>
+
                 <input
                     type="checkbox"
                     class="categoria"
                     value="Protectores"
                 >
+
                 Protectores
+
             </label>
 
             <label>
+
                 <input
                     type="checkbox"
                     class="categoria"
                     value="Dobok"
                 >
+
                 Dobok
+
             </label>
 
             <label>
+
                 <input
                     type="checkbox"
                     class="categoria"
                     value="Entrenamiento"
                 >
+
                 Entrenamiento
+
             </label>
 
         </div>

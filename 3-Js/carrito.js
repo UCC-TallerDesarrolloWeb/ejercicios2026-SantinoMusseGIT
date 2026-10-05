@@ -1,15 +1,17 @@
-// Recuperamos el carrito guardado en localStorage.
-// Si no hay nada guardado, usamos un array vacío.
+// Recuperar carrito
 let carrito =
     JSON.parse(localStorage.getItem("carrito")) || [];
 
 
-// Buscamos el div donde mostramos los productos
+// Elementos HTML
 const contenedorCarrito =
     document.getElementById("carrito");
 
+const totalCarrito =
+    document.getElementById("totalCarrito");
 
-// Función para formatear el precio
+
+// Formatear precio
 function formatearPrecio(precio) {
 
     return new Intl.NumberFormat("es-AR", {
@@ -20,13 +22,12 @@ function formatearPrecio(precio) {
 }
 
 
-// Función para mostrar los productos del carrito
+// Mostrar carrito
 function mostrarCarrito() {
 
-    // Limpiamos el contenido
     contenedorCarrito.innerHTML = "";
 
-    // Si está vacío
+
     if (carrito.length === 0) {
 
         contenedorCarrito.innerHTML =
@@ -34,16 +35,27 @@ function mostrarCarrito() {
 
     } else {
 
-        // Recorremos todos los productos
         carrito.forEach(
             (producto, indice) => {
+
+                // Si el producto viejo no tenía cantidad,
+                // tomamos cantidad 1
+                const cantidad =
+                    producto.cantidad || 1;
+
+
+                const subtotal =
+                    producto.precio * cantidad;
+
 
                 const tarjeta =
                     document.createElement("div");
 
+
                 tarjeta.classList.add(
                     "tarjeta-producto"
                 );
+
 
                 tarjeta.innerHTML = `
                     <img
@@ -51,7 +63,9 @@ function mostrarCarrito() {
                         alt="${producto.nombre}"
                     >
 
-                    <h3>${producto.nombre}</h3>
+                    <h3>
+                        ${producto.nombre}
+                    </h3>
 
                     <p>
                         ${producto.description}
@@ -67,12 +81,23 @@ function mostrarCarrito() {
                         ${formatearPrecio(producto.precio)}
                     </p>
 
+                    <p>
+                        Cantidad:
+                        ${cantidad}
+                    </p>
+
+                    <p>
+                        Subtotal:
+                        ${formatearPrecio(subtotal)}
+                    </p>
+
                     <button
                         onclick="eliminarProducto(${indice})"
                     >
                         Eliminar producto
                     </button>
                 `;
+
 
                 contenedorCarrito.appendChild(
                     tarjeta
@@ -83,10 +108,37 @@ function mostrarCarrito() {
 
     }
 
+
+    calcularTotal();
+
 }
 
 
-// Función para eliminar un producto
+// Calcular total del carrito
+function calcularTotal() {
+
+    const total =
+        carrito.reduce(
+            (acumulador, producto) => {
+
+                const cantidad =
+                    producto.cantidad || 1;
+
+                return acumulador +
+                    producto.precio * cantidad;
+
+            },
+            0
+        );
+
+
+    totalCarrito.textContent =
+        formatearPrecio(total);
+
+}
+
+
+// Eliminar producto
 function eliminarProducto(indice) {
 
     carrito.splice(
@@ -94,29 +146,33 @@ function eliminarProducto(indice) {
         1
     );
 
+
     localStorage.setItem(
         "carrito",
         JSON.stringify(carrito)
     );
+
 
     mostrarCarrito();
 
 }
 
 
-// Función para vaciar todo el carrito
+// Vaciar carrito
 function vaciarCarrito() {
 
     localStorage.removeItem(
         "carrito"
     );
 
+
     carrito = [];
+
 
     mostrarCarrito();
 
 }
 
 
-// Mostramos el carrito al cargar
+// Mostrar al cargar
 mostrarCarrito();
