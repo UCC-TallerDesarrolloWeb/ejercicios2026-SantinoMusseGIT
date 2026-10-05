@@ -64,6 +64,17 @@ const productos = [
 ];
 
 
+// Función para formatear el precio
+function formatearPrecio(precio) {
+
+    return new Intl.NumberFormat("es-AR", {
+        style: "currency",
+        currency: "ARS"
+    }).format(precio);
+
+}
+
+
 // Recuperamos el carrito guardado
 let carrito =
     JSON.parse(localStorage.getItem("carrito")) || [];
@@ -88,6 +99,18 @@ const selectMarca =
 const checkCategorias =
     document.querySelectorAll(".categoria");
 
+const contadorCarrito =
+    document.getElementById("contadorCarrito");
+
+
+// Función para actualizar el contador del carrito
+function actualizarContadorCarrito() {
+
+    contadorCarrito.textContent =
+        carrito.length;
+
+}
+
 
 // Función para mostrar productos
 function mostrarProductos(listaProductos) {
@@ -110,7 +133,9 @@ function mostrarProductos(listaProductos) {
         const tarjeta =
             document.createElement("div");
 
-        tarjeta.classList.add("tarjeta-producto");
+        tarjeta.classList.add(
+            "tarjeta-producto"
+        );
 
         tarjeta.innerHTML = `
             <img
@@ -124,9 +149,15 @@ function mostrarProductos(listaProductos) {
 
             <p>Marca: ${producto.marca}</p>
 
-            <p>Categoría: ${producto.categoria}</p>
+            <p>
+                Categoría:
+                ${producto.categoria}
+            </p>
 
-            <p>Precio: $${producto.precio}</p>
+            <p>
+                Precio:
+                ${formatearPrecio(producto.precio)}
+            </p>
 
             <button
                 onclick="agregarAlCarrito(${indiceOriginal})"
@@ -135,7 +166,9 @@ function mostrarProductos(listaProductos) {
             </button>
         `;
 
-        contenedorProductos.appendChild(tarjeta);
+        contenedorProductos.appendChild(
+            tarjeta
+        );
 
     });
 
@@ -158,20 +191,22 @@ function filtrarProductos() {
         selectMarca.value;
 
 
-    // Obtenemos las categorías marcadas
+    // Categorías seleccionadas
     const categoriasSeleccionadas = [];
 
-    checkCategorias.forEach((checkbox) => {
+    checkCategorias.forEach(
+        (checkbox) => {
 
-        if (checkbox.checked) {
+            if (checkbox.checked) {
 
-            categoriasSeleccionadas.push(
-                checkbox.value
-            );
+                categoriasSeleccionadas.push(
+                    checkbox.value
+                );
+
+            }
 
         }
-
-    });
+    );
 
 
     const productosFiltrados =
@@ -182,7 +217,9 @@ function filtrarProductos() {
                 producto.nombre
                     .toLowerCase()
                     .includes(texto)
+
                 ||
+
                 producto.description
                     .toLowerCase()
                     .includes(texto);
@@ -199,7 +236,8 @@ function filtrarProductos() {
             const coincideMarca =
                 marcaSeleccionada === ""
                 ||
-                producto.marca === marcaSeleccionada;
+                producto.marca ===
+                    marcaSeleccionada;
 
 
             // Filtro por categoría
@@ -224,7 +262,10 @@ function filtrarProductos() {
         });
 
 
-    mostrarProductos(productosFiltrados);
+    mostrarProductos(
+        productosFiltrados
+    );
+
 }
 
 
@@ -249,32 +290,45 @@ selectMarca.addEventListener(
     filtrarProductos
 );
 
-checkCategorias.forEach((checkbox) => {
+checkCategorias.forEach(
+    (checkbox) => {
 
-    checkbox.addEventListener(
-        "change",
-        filtrarProductos
-    );
+        checkbox.addEventListener(
+            "change",
+            filtrarProductos
+        );
 
-});
+    }
+);
 
 
-// Agregar producto al carrito
+// Función para agregar producto al carrito
 function agregarAlCarrito(indice) {
 
     const productoSeleccionado =
         productos[indice];
 
-    carrito.push(productoSeleccionado);
+    carrito.push(
+        productoSeleccionado
+    );
 
     localStorage.setItem(
         "carrito",
         JSON.stringify(carrito)
     );
 
-    alert("Producto agregado al carrito");
+    actualizarContadorCarrito();
+
+    alert(
+        "Producto agregado al carrito"
+    );
+
 }
 
 
-// Mostrar todos al cargar la página
+// Mostrar productos al cargar
 mostrarProductos(productos);
+
+
+// Mostrar cantidad de productos del carrito
+actualizarContadorCarrito();
