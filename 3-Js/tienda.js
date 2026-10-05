@@ -64,55 +64,209 @@ const productos = [
 ];
 
 
-// Recuperamos el carrito guardado.
-// Si no existe todavía, usamos un array vacío.
-let carrito = JSON.parse(localStorage.getItem("carrito")) || [];
+// Recuperamos el carrito guardado
+let carrito =
+    JSON.parse(localStorage.getItem("carrito")) || [];
 
 
-// Buscamos el div donde vamos a mostrar los productos
-const contenedorProductos = document.getElementById("productos");
+// Elementos del HTML
+const contenedorProductos =
+    document.getElementById("productos");
+
+const inputBusqueda =
+    document.getElementById("busqueda");
+
+const inputPrecioMin =
+    document.getElementById("precioMin");
+
+const inputPrecioMax =
+    document.getElementById("precioMax");
+
+const selectMarca =
+    document.getElementById("marca");
+
+const checkCategorias =
+    document.querySelectorAll(".categoria");
 
 
-// Recorremos el array de productos
-productos.forEach((producto, indice) => {
+// Función para mostrar productos
+function mostrarProductos(listaProductos) {
 
-    // Creamos una tarjeta
-    const tarjeta = document.createElement("div");
+    contenedorProductos.innerHTML = "";
 
-    tarjeta.classList.add("tarjeta-producto");
+    if (listaProductos.length === 0) {
 
-    // Agregamos el contenido de la tarjeta
-    tarjeta.innerHTML = `
-        <img src="images/${producto.imagen}" alt="${producto.nombre}">
+        contenedorProductos.innerHTML =
+            "<p>No se encontraron productos.</p>";
 
-        <h3>${producto.nombre}</h3>
+        return;
+    }
 
-        <p>${producto.description}</p>
+    listaProductos.forEach((producto) => {
 
-        <p>Marca: ${producto.marca}</p>
+        const indiceOriginal =
+            productos.indexOf(producto);
 
-        <p>Precio: $${producto.precio}</p>
+        const tarjeta =
+            document.createElement("div");
 
-        <button onclick="agregarAlCarrito(${indice})">
-            Agregar al carrito
-        </button>
-    `;
+        tarjeta.classList.add("tarjeta-producto");
 
-    // Agregamos la tarjeta al HTML
-    contenedorProductos.appendChild(tarjeta);
+        tarjeta.innerHTML = `
+            <img
+                src="images/${producto.imagen}"
+                alt="${producto.nombre}"
+            >
+
+            <h3>${producto.nombre}</h3>
+
+            <p>${producto.description}</p>
+
+            <p>Marca: ${producto.marca}</p>
+
+            <p>Categoría: ${producto.categoria}</p>
+
+            <p>Precio: $${producto.precio}</p>
+
+            <button
+                onclick="agregarAlCarrito(${indiceOriginal})"
+            >
+                Agregar al carrito
+            </button>
+        `;
+
+        contenedorProductos.appendChild(tarjeta);
+
+    });
+
+}
+
+
+// Función principal de filtros
+function filtrarProductos() {
+
+    const texto =
+        inputBusqueda.value.toLowerCase();
+
+    const precioMin =
+        Number(inputPrecioMin.value) || 0;
+
+    const precioMax =
+        Number(inputPrecioMax.value) || Infinity;
+
+    const marcaSeleccionada =
+        selectMarca.value;
+
+
+    // Obtenemos las categorías marcadas
+    const categoriasSeleccionadas = [];
+
+    checkCategorias.forEach((checkbox) => {
+
+        if (checkbox.checked) {
+
+            categoriasSeleccionadas.push(
+                checkbox.value
+            );
+
+        }
+
+    });
+
+
+    const productosFiltrados =
+        productos.filter((producto) => {
+
+            // Filtro por palabra
+            const coincideTexto =
+                producto.nombre
+                    .toLowerCase()
+                    .includes(texto)
+                ||
+                producto.description
+                    .toLowerCase()
+                    .includes(texto);
+
+
+            // Filtro por precio
+            const coincidePrecio =
+                producto.precio >= precioMin
+                &&
+                producto.precio <= precioMax;
+
+
+            // Filtro por marca
+            const coincideMarca =
+                marcaSeleccionada === ""
+                ||
+                producto.marca === marcaSeleccionada;
+
+
+            // Filtro por categoría
+            const coincideCategoria =
+                categoriasSeleccionadas.length === 0
+                ||
+                categoriasSeleccionadas.includes(
+                    producto.categoria
+                );
+
+
+            return (
+                coincideTexto
+                &&
+                coincidePrecio
+                &&
+                coincideMarca
+                &&
+                coincideCategoria
+            );
+
+        });
+
+
+    mostrarProductos(productosFiltrados);
+}
+
+
+// Eventos de los filtros
+inputBusqueda.addEventListener(
+    "input",
+    filtrarProductos
+);
+
+inputPrecioMin.addEventListener(
+    "input",
+    filtrarProductos
+);
+
+inputPrecioMax.addEventListener(
+    "input",
+    filtrarProductos
+);
+
+selectMarca.addEventListener(
+    "change",
+    filtrarProductos
+);
+
+checkCategorias.forEach((checkbox) => {
+
+    checkbox.addEventListener(
+        "change",
+        filtrarProductos
+    );
+
 });
 
 
-// Función para agregar un producto al carrito
+// Agregar producto al carrito
 function agregarAlCarrito(indice) {
 
-    // Obtenemos el producto según su posición
-    const productoSeleccionado = productos[indice];
+    const productoSeleccionado =
+        productos[indice];
 
-    // Agregamos el producto al array carrito
     carrito.push(productoSeleccionado);
 
-    // Guardamos el array en localStorage
     localStorage.setItem(
         "carrito",
         JSON.stringify(carrito)
@@ -120,3 +274,7 @@ function agregarAlCarrito(indice) {
 
     alert("Producto agregado al carrito");
 }
+
+
+// Mostrar todos al cargar la página
+mostrarProductos(productos);
