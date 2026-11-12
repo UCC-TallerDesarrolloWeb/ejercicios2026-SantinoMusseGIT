@@ -2,51 +2,72 @@ import { useEffect, useState } from "react";
 import PokeCard from "@/components/PokeCard";
 
 function Poke() {
-  const [pokemon, setPokemon] = useState(null);
+  const [pokemons, setPokemons] = useState([]);
+  const [cargando, setCargando] = useState(true);
   const [error, setError] = useState("");
 
   useEffect(() => {
     const controller = new AbortController();
 
-    async function obtenerPokemon() {
+    async function fetchAllPokemons() {
       try {
-        const respuesta = await fetch(
-          "https://pokeapi.co/api/v2/pokemon/1",
-          { signal: controller.signal }
-        );
+        // Crear las 20 solicitudes a la API
+        const promesas = [];
 
-        if (!respuesta.ok) {
-          throw new Error("Error al consultar PokéAPI");
+        for (let i = 1; i <= 20; i++) {
+          promesas.push(
+            fetch(`https://pokeapi.co/api/v2/pokemon/${i}`, {
+              signal: controller.signal,
+            }).then((respuesta) => {
+              if (!respuesta.ok) {
+                throw new Error(`Error al obtener Pokémon ${i}`);
+              }
+
+              return respuesta.json();
+            })
+          );
         }
 
-        const datos = await respuesta.json();
-        setPokemon(datos);
+        // Esperar a que terminen todas las solicitudes
+        const datos = await Promise.all(promesas);
+
+        if (!controller.signal.aborted) {
+          setPokemons(datos);
+        }
       } catch (err) {
         if (err.name !== "AbortError") {
           setError(err.message);
         }
+      } finally {
+        if (!controller.signal.aborted) {
+          setCargando(false);
+        }
       }
     }
 
-    obtenerPokemon();
+    fetchAllPokemons();
 
     return () => controller.abort();
   }, []);
 
   return (
     <section className="actividades-container">
-      <h1>PokéAPI en React</h1>
+      <h1>Los primeros 20 Pokémon</h1>
 
-      {error && <p role="alert">{error}</p>}
+      <p>Datos obtenidos desde PokéAPI</p>
 
-      {!pokemon && !error && <p>Cargando Pokémon...</p>}
+      {cargando && <p>Cargando Pokémon...</p>}
 
-      {pokemon && (
-        <div
-          className="actividades-grid"
-          style={{ gridTemplateColumns: "1fr", maxWidth: 450 }}
-        >
-          <PokeCard pokemon={pokemon} />
+      {error && <p role="alert">Error: {error}</p>}
+
+      {!cargando && !error && (
+        <div className="actividades-grid">
+          {pokemons.map((pokemon) => (
+            <PokeCard
+              key={pokemon.id}
+              pokemon={pokemon}
+            />
+          ))}
         </div>
       )}
     </section>
