@@ -1,4 +1,3 @@
-import { Link } from "react-router-dom";
 import "./styles/Actividades.scss";
 
 const activities = [
@@ -30,13 +29,16 @@ const dias = {
   7: "Domingo"
 };
 
-function Actividades() {
-  return (
-    <main className="actividades-container">
+function Actividades({ estaLogueado }) {
+  const inscribirse = (nombre) => {
+    alert(`Inscripción simulada a ${nombre}`);
+  };
 
+  return (
+    <section className="actividades-container">
       <h1>Actividades del Gimnasio</h1>
 
-      <p>Conocé nuestras actividades y horarios disponibles.</p>
+      <p>Conocé nuestras actividades y horarios.</p>
 
       <div className="actividades-grid">
         {activities.map((actividad) => (
@@ -59,15 +61,19 @@ function Actividades() {
                 </li>
               ))}
             </ul>
+
+            {estaLogueado && (
+              <button
+                className="inscribirme"
+                onClick={() => inscribirse(actividad.nombre)}
+              >
+                Inscribirme
+              </button>
+            )}
           </div>
         ))}
       </div>
-
-      <Link to="/" className="volver-login">
-        Volver al Login
-      </Link>
-
-    </main>
+    </section>
   );
 }
 

@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-function Login() {
+function Login({ onLogin }) {
   const [usuario, setUsuario] = useState("");
   const [password, setPassword] = useState("");
   const [mensaje, setMensaje] = useState("");
@@ -15,7 +15,7 @@ function Login() {
       console.log("Login OK");
       setMensaje("");
 
-      // Redirigir a la página de actividades
+      onLogin();
       navigate("/actividades");
     } else {
       console.log("Login Incorrecto");
