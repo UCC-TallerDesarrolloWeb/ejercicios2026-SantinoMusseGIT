@@ -1,0 +1,117 @@
+$principal: #007bff;
+$oscuro: #1f2937;
+$blanco: #ffffff;
+
+.app-layout {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.site-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 20px;
+
+  background: $oscuro;
+  color: $blanco;
+  padding: 20px 35px;
+
+  h2 {
+    margin: 0;
+    color: $blanco;
+  }
+
+  nav {
+    display: flex;
+    gap: 25px;
+    flex-wrap: wrap;
+
+    a {
+      color: $blanco;
+      text-decoration: none;
+
+      &:hover,
+      &.active {
+        color: #93c5fd;
+      }
+    }
+  }
+
+  button {
+    padding: 10px 18px;
+    border: none;
+    border-radius: 6px;
+    background: #dc3545;
+    color: $blanco;
+    cursor: pointer;
+  }
+}
+
+.layout-main {
+  flex: 1;
+}
+
+.site-footer {
+  background: $oscuro;
+  color: $blanco;
+  padding: 20px;
+  text-align: center;
+
+  p {
+    margin: 5px;
+  }
+}
+
+.home-page {
+  text-align: center;
+  padding: 90px 20px;
+
+  h1 {
+    font-size: 36px;
+  }
+
+  p {
+    margin-bottom: 35px;
+  }
+}
+
+.home-button,
+.inscribirme {
+  background: $principal;
+  color: $blanco;
+  padding: 12px 22px;
+  border: none;
+  border-radius: 6px;
+  text-decoration: none;
+  cursor: pointer;
+  display: inline-block;
+
+  &:hover {
+    background: #0056b3;
+  }
+}
+
+// Adaptar los estilos anteriores al Layout compartido
+.layout-main .login-container,
+.layout-main .actividades-container {
+  min-height: calc(100vh - 160px);
+}
+
+@media (max-width: 600px) {
+  .site-header {
+    flex-direction: column;
+    text-align: center;
+    padding: 20px;
+
+    nav {
+      justify-content: center;
+    }
+  }
+
+  .home-page {
+    padding: 50px 15px;
+  }
+}

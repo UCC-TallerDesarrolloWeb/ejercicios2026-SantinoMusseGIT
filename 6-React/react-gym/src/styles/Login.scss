@@ -1,0 +1,73 @@
+$color-principal: #007bff;
+$color-hover: #0056b3;
+$color-fondo: #f3f4f6;
+$color-blanco: #ffffff;
+$color-texto: #222222;
+
+$radio-borde: 12px;
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background-color: $color-fondo;
+}
+
+.login-container {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.login-card {
+  width: 350px;
+  max-width: 90%;
+  padding: 30px;
+  background-color: $color-blanco;
+  border-radius: $radio-borde;
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.12);
+
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+
+  h2 {
+    text-align: center;
+    color: $color-texto;
+  }
+
+  input {
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-size: 15px;
+
+    &:focus {
+      outline: 2px solid $color-principal;
+      border-color: $color-principal;
+    }
+  }
+
+  button {
+    background-color: $color-principal;
+    color: $color-blanco;
+    padding: 12px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 15px;
+
+    &:hover {
+      background-color: $color-hover;
+    }
+  }
+
+  .mensaje {
+    text-align: center;
+    color: $color-texto;
+  }
+}

@@ -1,0 +1,77 @@
+$color-principal: #007bff;
+$color-texto: #1f2937;
+$color-blanco: #ffffff;
+
+.home-page.gimnasio-home {
+  max-width: 1150px;
+  margin: 0 auto;
+  padding: 50px 20px;
+  text-align: center;
+
+  h1 {
+    font-size: 36px;
+    color: $color-texto;
+    margin-bottom: 15px;
+  }
+
+  .home-descripcion {
+    font-size: 18px;
+    color: #666;
+    margin-bottom: 40px;
+  }
+
+  .home-cards {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 25px;
+    margin-bottom: 40px;
+  }
+
+  .home-card {
+    background: $color-blanco;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.12);
+    transition: transform 0.2s;
+
+    &:hover {
+      transform: translateY(-5px);
+    }
+
+    img {
+      width: 100%;
+      height: 250px;
+      object-fit: cover;
+      display: block;
+    }
+
+    .home-card-contenido {
+      padding: 20px;
+
+      h2 {
+        font-size: 21px;
+        color: $color-texto;
+        margin: 0;
+      }
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  .home-page.gimnasio-home {
+    padding: 30px 15px;
+
+    h1 {
+      font-size: 27px;
+    }
+
+    .home-cards {
+      grid-template-columns: 1fr;
+      gap: 20px;
+    }
+
+    .home-card img {
+      height: 220px;
+    }
+  }
+}

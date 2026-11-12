@@ -1,0 +1,74 @@
+$color-principal: #007bff;
+$color-fondo: #f3f4f6;
+$color-blanco: #ffffff;
+$color-texto: #333333;
+
+.actividades-container {
+  min-height: 100vh;
+  background: $color-fondo;
+  padding: 50px 20px;
+  text-align: center;
+  color: $color-texto;
+
+  h1 {
+    font-size: 32px;
+    margin-bottom: 15px;
+  }
+
+  > p {
+    margin-bottom: 35px;
+  }
+}
+
+.actividades-grid {
+  max-width: 1000px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 25px;
+}
+
+.actividad-card {
+  background: $color-blanco;
+  padding: 30px;
+  border-radius: 12px;
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+  text-align: left;
+
+  h2 {
+    color: $color-principal;
+    margin-top: 0;
+  }
+
+  h3 {
+    margin-top: 25px;
+  }
+
+  ul {
+    padding-left: 20px;
+
+    li {
+      margin-bottom: 10px;
+    }
+  }
+}
+
+.volver-login {
+  display: inline-block;
+  margin-top: 35px;
+  padding: 12px 25px;
+  background: $color-principal;
+  color: white;
+  border-radius: 6px;
+  text-decoration: none;
+
+  &:hover {
+    background: #0056b3;
+  }
+}
+
+@media (max-width: 768px) {
+  .actividades-grid {
+    grid-template-columns: 1fr;
+  }
+}
