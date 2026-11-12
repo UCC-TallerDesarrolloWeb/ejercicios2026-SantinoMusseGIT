@@ -1,0 +1,81 @@
+{
+  "activities": [
+    {
+      "id": "1",
+      "nombre": "taekwondo",
+      "descripcion": "Arte marcial coreana",
+      "horarios": [
+        {
+          "dia": 2,
+          "hora-inicio": "18:30",
+          "hora-fin": "20:00"
+        },
+        {
+          "dia": 4,
+          "hora-inicio": "18:30",
+          "hora-fin": "20:00"
+        }
+      ]
+    },
+    {
+      "id": "2",
+      "nombre": "zumba",
+      "descripcion": "Ritmos latinos",
+      "horarios": [
+        {
+          "dia": 1,
+          "hora-inicio": "19:30",
+          "hora-fin": "20:30"
+        },
+        {
+          "dia": 3,
+          "hora-inicio": "19:30",
+          "hora-fin": "20:30"
+        }
+      ]
+    }
+  ],
+  "products": [
+    {
+      "id": "1",
+      "nombre": "Cabezal Sparring",
+      "description": "Cabezal de protección para entrenamiento.",
+      "categoria": "Protectores",
+      "marca": "Gran Marc",
+      "talle": ["1", "2", "3"],
+      "precio": 35000,
+      "imagen": ""
+    },
+    {
+      "id": "2",
+      "nombre": "Guantes de Boxeo",
+      "description": "Guantes para entrenamiento y sparring.",
+      "categoria": "Guantes",
+      "marca": "Deportivo",
+      "talle": ["10 oz", "12 oz", "14 oz"],
+      "precio": 42000,
+      "imagen": ""
+    },
+    {
+      "id": "3",
+      "nombre": "Protector Bucal",
+      "description": "Protector bucal para deportes de contacto.",
+      "categoria": "Protectores",
+      "marca": "Deportivo",
+      "talle": ["Unico"],
+      "precio": 12000,
+      "imagen": ""
+    },
+    {
+      "id": "4",
+      "nombre": "Dobok Taekwondo",
+      "description": "Uniforme para practicar taekwondo.",
+      "categoria": "Indumentaria",
+      "marca": "Gran Marc",
+      "talle": ["S", "M", "L", "XL"],
+      "precio": 65000,
+      "imagen": ""
+    }
+  ],
+  "cart": []
+}
