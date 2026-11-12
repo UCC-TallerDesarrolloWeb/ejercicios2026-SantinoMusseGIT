@@ -1,30 +1,35 @@
-import { NavLink, useNavigate } from "react-router-dom";
+  import { NavLink, useNavigate } from "react-router-dom";
 
-function Header({ estaLogueado, onLogout }) {
-  const navigate = useNavigate();
+  function Header({ estaLogueado, onLogout }) {
+    const navigate = useNavigate();
 
-  const handleLogout = () => {
-    onLogout();
-    navigate("/login");
-  };
+    const handleLogout = () => {
+      onLogout();
+      navigate("/login");
+    };
 
-  return (
-    <header className="site-header">
-      <h2>React Gym</h2>
+    return (
+      <header className="site-header">
+        <h2>React Gym</h2>
 
-      <nav>
-        <NavLink to="/">Home</NavLink>
-        <NavLink to="/login">Login</NavLink>
-        <NavLink to="/actividades">Actividades</NavLink>
-      </nav>
+        <nav>
+          <NavLink to="/">Home</NavLink>
+          <NavLink to="/login">Login</NavLink>
+          <NavLink to="/actividades">Actividades</NavLink>
+          <NavLink to="/tienda">Tienda</NavLink>
 
-      {estaLogueado && (
-        <button onClick={handleLogout}>
-          Logout
-        </button>
-      )}
-    </header>
-  );
-}
+  {estaLogueado && (
+    <NavLink to="/carrito">Carrito</NavLink>
+  )}
+        </nav>
 
-export default Header;
+        {estaLogueado && (
+          <button onClick={handleLogout}>
+            Logout
+          </button>
+        )}
+      </header>
+    );
+  }
+
+  export default Header;
