@@ -1,12 +1,13 @@
 import { useState } from "react";
 import { Routes, Route, Navigate } from "react-router-dom";
-
+import Poke from "@/pages/Poke";
 import Layout from "@/components/Layout";
 import Home from "@/pages/Home";
 import Login from "@/pages/Login";
 import Actividades from "@/pages/Actividades";
 
 import "@/styles/Layout.scss";
+
 
 function App() {
   const [estaLogueado, setEstaLogueado] = useState(() => {
@@ -25,6 +26,7 @@ function App() {
 
   return (
     <Routes>
+      <Route path="pokemon" element={<Poke />} />
       <Route
         element={
           <Layout
